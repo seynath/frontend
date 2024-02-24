@@ -1,0 +1,8 @@
+#heroImg{
+  /* background-image: url('https://media.geeksforgeeks.org/wp-content/uploads/20230920011238/Best-Poki-Games-in-2023-copy.webp'); */
+  background-image: url('../public/images/rupee.png');
+  position: static;
+  background-size: cover;
+  background-position: center;
+  
+}
