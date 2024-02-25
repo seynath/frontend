@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Header from './Header'
-import API_BASE_URL from '../config'
 
 function Login() {
+  const API_URL = import.meta.env.VITE_API_URL
+
+
   const[value,setValue] = useState({
     email:'',
     password:''
@@ -13,23 +15,6 @@ function Login() {
   const navigate = useNavigate()
   axios.defaults.withCredentials = true
 
-  // const loginForm = (e) => {
-  //   e.preventDefault()
-  //   console.log('form submitted')
-  //   axios.post('http://localhost:8000/login',value)
-  //     .then(response => {
-  //       console.log(response)
-  //       if(response.status === 200){
-  //         navigate('/')
-  //       }
-  //       else{
-  //         alert('Error')
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //     } )
-  // }
 
   const loginForm = (e) => {
     e.preventDefault();
@@ -47,7 +32,7 @@ function Login() {
     };
   
     // Server-side validation and authentication
-    axios.post(`${API_BASE_URL}/login`, formData)
+    axios.post(`${API_URL}/login`, formData)
       .then(response => {
         console.log(response);
         if (response.status === 200) {

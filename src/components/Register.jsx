@@ -3,9 +3,11 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import Header from './Header'
-import API_BASE_URL from '../config'
 
 function Register() {
+
+  const API_URL = import.meta.env.VITE_API_URL
+
   const[value,setValue]=useState({
     name:'',
     email:'',
@@ -47,7 +49,7 @@ function Register() {
     };
 
     console.log('form submitted');
-    axios.post(`${API_BASE_URL}/register`, sanitizedValue)
+    axios.post(`${API_URL}/register`, sanitizedValue)
       .then(response => {
         console.log(response);
         if (response.status === 200) {

@@ -4,14 +4,15 @@
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import API_BASE_URL from '../config'
+
 
 function Header() {
   const navigate = useNavigate()
 const [auth, setAuth] = useState('')
+const API_URL = import.meta.env.VITE_API_URL
 
   useEffect(() => {
-    axios.get(`${API_BASE_URL}`)
+    axios.get(`${API_URL}`)
       .then(res => {
         if (res.data.auth) {
           setAuth(true)
@@ -24,7 +25,7 @@ const [auth, setAuth] = useState('')
 
 
   const logout = () => {
-    axios.get(`${API_BASE_URL}/logout`)
+    axios.get(`${API_URL}/logout`)
       .then(res => {
         console.log(res)
         if (res.status === 200) {

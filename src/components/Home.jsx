@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
 import "../App.css";
-import  API_BASE_URL  from "../config";
 
 function Home() {
   axios.defaults.withCredentials = true;
+
+  const API_URL = import.meta.env.VITE_API_URL
+
 
   const [auth, setAuth] = useState('');
   // const [name, setName] = useState("");
@@ -21,7 +23,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}`)
+      .get(`${API_URL}`)
       .then((res) => {
         if (res.data.auth) {
           setAuth(true);
@@ -40,7 +42,7 @@ function Home() {
     console.log(e.target.role.value);
     e.preventDefault();
     axios
-      .post(`${API_BASE_URL}/taxcal`, { salary: e.target.salary.value , role: e.target.role.value})
+      .post(`${API_URL}/taxcal`, { salary: e.target.salary.value , role: e.target.role.value})
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data);
@@ -64,7 +66,7 @@ function Home() {
         homeSalary: homeSalary,
       };
       axios
-        .post(`${API_BASE_URL}/save-salary`, data)
+        .post(`${API_URL}/save-salary`, data)
         .then(() => {
           window.location.reload();
         })
@@ -74,7 +76,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}/report`, { params: { id: id } })
+      .get(`${API_URL}/report`, { params: { id: id } })
       .then((res) => {
         if (res.status === 200) {
           setReport(res.data);
@@ -88,7 +90,7 @@ function Home() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`${API_BASE_URL}/delete/${id}`)
+      .delete(`${API_URL}/delete/${id}`)
       .then(() => {
         window.location.reload();
       })
